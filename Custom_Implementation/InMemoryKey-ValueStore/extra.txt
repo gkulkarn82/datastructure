@@ -1,0 +1,101 @@
+================================================================
+Socket Function
+
+SYNOPSIS
+#include <sys/socket.h>
+
+int socket(int domain, int type, int protocol);
+
+DESCRIPTION
+The socket() function shall create an unbound socket in a communications domain, and return a file descriptor that can be used in later function calls that operate on sockets.
+
+The socket() function takes the following arguments:
+
+domain
+	Specifies the communications domain in which a socket is to be created.
+type
+	Specifies the type of socket to be created.
+protocol
+	Specifies a particular protocol to be used with the socket. Specifying a protocol of 0 causes socket() to use an unspecified default protocol appropriate for the requested socket type.
+
+The domain argument specifies the address family used in the communications domain. The address families supported by the system are implementation-defined.
+
+Symbolic constants that can be used for the domain argument are defined in the <sys/socket.h> header.
+
+The type argument specifies the socket type, which determines the semantics of communication over the socket. The following socket types are defined; implementations may specify additional socket types:
+
+SOCK_STREAM
+	Provides sequenced, reliable, bidirectional, connection-mode byte streams, and may provide a transmission mechanism for out-of-band data.
+SOCK_DGRAM
+	Provides datagrams, which are connectionless-mode, unreliable messages of fixed maximum length.
+SOCK_SEQPACKET
+	Provides sequenced, reliable, bidirectional, connection-mode transmission paths for records. A record can be sent using one or more output 
+    operations and received using one or more input operations, but a single operation never transfers part of more than one record. 
+    Record boundaries are visible to the receiver via the MSG_EOR flag.
+
+If the protocol argument is non-zero, it shall specify a protocol that is supported by the address family. If the protocol argument is zero, the default protocol for this address family and type shall be used. The protocols supported by the system are implementation-defined.
+
+The process may need to have appropriate privileges to use the socket() function or to create some sockets.
+
+RETURN VALUE
+	Upon successful completion, socket() shall return a non-negative integer, the socket file descriptor. Otherwise, a value of -1 shall be returned and errno set to indicate the error.
+	
+=======================================================================================================
+
+To Support IPV6 we can use AF_INET6
+
+AF_INET means(Address form internet 4 and 6 means IPv4 and IPv6 respectively)
+
+=======================================================================================================
+
+Why we cast sockaddr_in to sockaddr
+
+sockaddr is a generic descriptor for any kind of socket operation, whereas sockaddr_in is a struct specific to IP-based communication 
+(IIRC, "in" stands for "InterNet"). As far as I know, this is a kind of "polymorphism" : the bind() function pretends to take a struct sockaddr *,
+ but in fact, it will assume that the appropriate type of structure is passed in; i. e. one that corresponds to the type of socket you give it as the 
+ first argument.
+
+=========================================================================================================
+
+What need to be done to support both IPv4 and IPv6
+
+ srvAddr.sin_addr.s_addr = INADDR_ANY; this need to be changed to 
+ 
+=============================================================================================================
+definition : int listen(int sockfd, int backlog);
+
+listen(serverSocket, 5) == -1)
+
+It puts the server socket in a passive mode, where it waits for the client to approach the server to make a connection. 
+The backlog, defines the maximum length to which the queue of pending connections for sockfd may grow. 
+If a connection request arrives when the queue is full, the client may receive an error with an indication of ECONNREFUSED.
+
+========================================================================================================
+
+Definition: int new_socket= accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
+int clientSocket = accept(serverSocket, reinterpret_cast<sockaddr*>(&srvAddr), &clntAddrLen);
+
+It extracts the first connection request on the queue of pending connections for the listening socket, sockfd, creates a new connected socket, 
+and returns a new file descriptor referring to that socket. At this point, the connection is established between client and server, and they are
+ready to transfer data.
+
+=====================================================================================================
+
+std::thread detach in C++ allows the creation of a new thread that runs independently from the main thread. 
+The main thread returns immediately after the detach() function call, while the newly created thread continues to execute its task in the background. 
+This can be useful for tasks that are computationally intensive or time-consuming, allowing the main program to continue executing without waiting for the task to finish. It is important to be careful when using detach() as the function is not guaranteed to return, and on destruction of the threadobject any resources it holds will also be destructed.
+
+we can use thread::join()
+
+=========================================================================================================
+
+std::function : https://en.cppreference.com/w/cpp/utility/functional/function
+
+Class template std::function is a general-purpose polymorphic function wrapper. Instances of std::function can store, copy, and invoke any CopyConstructible Callable target -- functions (via pointers thereto), lambda expressions, bind expressions, or other function objects, as well as pointers to member functions and pointers to data members.
+
+The stored callable object is called the target of std::function. If a std::function contains no target, it is called empty. Invoking the target of an empty std::function results in std::bad_function_call exception being thrown.
+
+std::function satisfies the requirements of CopyConstructible and CopyAssignable.
+
+===============================================================================================================================
+

@@ -52,47 +52,47 @@ class Shared_ptr
 {
 public:
 	// Constructor
-	explicit Shared_ptr(T* ptr = nullptr)
+	explicit Shared_ptr(T* ptr = nullptr) noexcept :m_ptr(ptr)
 	{
-		m_ptr = ptr;
+		//m_ptr = ptr;
 		m_counter = new Counter();
 		(*m_counter)++;
 	}
 
 	// Copy constructor
-	Shared_ptr(Shared_ptr<T>& sp)
+	Shared_ptr(Shared_ptr<T>& sp) noexcept :m_ptr(sp.m_ptr), m_counter(sp.m_counter)
 	{
-		m_ptr = sp.m_ptr;
-		m_counter = sp.m_counter;
+		// m_ptr = sp.m_ptr;
+		// m_counter = sp.m_counter;
 		(*m_counter)++;
 	}
 
 	// Reference count
-	unsigned int use_count() 
+	unsigned int use_count() const noexcept
 	{ 
 		return m_counter->get(); 
 	}
 
 	// Get the pointer 
-	T* get() 
+	T* get() const noexcept
 	{ 
 		return m_ptr; 
 	}
 	
 	// * operator implemenation
-	T& operator*() 
+	T& operator*() const noexcept
 	{ 
 		return *m_ptr; 
 	}
 
 	// -> operator implemenation
-	T* operator->() 
+	T* operator->() const noexcept
 	{ 
 		return m_ptr;
 	}
 
 	// Destructor
-	~Shared_ptr()
+	~Shared_ptr() noexcept
 	{
 		(*m_counter)--;
 		if (m_counter->get() == 0) 

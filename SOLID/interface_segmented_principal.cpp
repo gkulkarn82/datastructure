@@ -1,7 +1,7 @@
 /*
     Interface Segmentation Principal
 
-    Def : Interfaces should be such that client should implement unnecessary functions they do not need
+    Def : Interfaces should be such that client should not need to implement unnecessary functions they do not need
 
 */
 

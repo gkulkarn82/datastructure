@@ -24,27 +24,30 @@ public:
 	// Destructor
 	~ReferenceCounter() = default;
 
-	void reset() { m_counter = 0; }
-	unsigned int get() 	{ return m_counter; }
+	void reset() noexcept { m_counter = 0; }
+	unsigned int get() const noexcept	{ return m_counter; }
 
 	// Operator functions
-	void operator++() { m_counter++; }
-	void operator++(int) { m_counter++; }
+	void operator++() noexcept { m_counter++; }
+	void operator++(int) noexcept { m_counter++; }
 
 	// Operator functions
-	void operator--() { m_counter--; }
-	void operator--(int) {  m_counter--; }
+	void operator--() noexcept { m_counter--; }
+	void operator--(int) noexcept {  m_counter--; }
 
 	// Overloading << operator
-	friend ostream& operator<<(ostream& os,	const ReferenceCounter& counter)
-	{
-		os << "Counter Value : " << counter.m_counter<< endl;
-		return os;
-	}
+	friend ostream& operator<<(ostream& os,	const ReferenceCounter& counter);
+	
 
 private:
 	unsigned int m_counter;
 };
+
+friend ostream& operator<<(ostream& os,	const ReferenceCounter& counter)
+{
+	os << "Counter Value : " << counter.m_counter<< endl;
+	return os;
+}
 
 // Class representing a shared pointer
 template <typename T>
@@ -62,9 +65,45 @@ public:
 	// Copy constructor
 	Shared_ptr(Shared_ptr<T>& sp) noexcept :m_ptr(sp.m_ptr), m_counter(sp.m_counter)
 	{
-		// m_ptr = sp.m_ptr;
-		// m_counter = sp.m_counter;
 		(*m_counter)++;
+	}
+
+	void swap(Shared_ptr& source)
+	{
+		std::swap(this->m_counter, source->m_counter);
+		std::swap(this->m_ptr, source->m_ptr);
+	}
+
+	//Copy Assignment operator
+	Shared_ptr& operator=(const Shared_ptr& source) noexcept
+	{
+		if(this != &source)
+		{
+			Shared_ptr tmp(source);
+			this->swap(tmp);
+		}
+		*this->m_counter++
+		return *this;
+	}
+
+	// Move Constructor
+	Shared_ptr(Shared_ptr<T>&& sp) noexcept :m_ptr(std::move(sp.m_ptr)), m_counter(std::move(sp.m_counter))
+	{
+		sp.m_ptr = nullptr;
+		sp.m_counter = 0;
+		(*m_counter)++;
+	}
+
+	//Copy Assignment operator
+	Shared_ptr& operator=(const Shared_ptr&& source) noexcept
+	{
+		if(this != &source)
+		{
+			Shared_ptr tmp(std::move(source));
+			this->swap(tmp);
+		}
+		*this->m_counter++
+		return *this;
 	}
 
 	// Reference count
@@ -102,12 +141,7 @@ public:
 		}
 	}
 
-	friend ostream& operator<<(ostream& os,	Shared_ptr<T>& sp)
-	{
-		os << "Address pointed : " << sp.get() << endl;
-		os << *(sp.m_counter) << endl;
-		return os;
-	}
+	friend ostream& operator<<(ostream& os,	Shared_ptr<T>& sp);	
 
 private:
 	// Reference counter
@@ -115,6 +149,13 @@ private:
 	// Shared pointer
 	T* m_ptr;
 };
+
+friend ostream& operator<<(ostream& os,	Shared_ptr<T>& sp)
+{
+	os << "Address pointed : " << sp.get() << endl;
+	os << *(sp.m_counter) << endl;
+	return os;
+}
 
 int main()
 {

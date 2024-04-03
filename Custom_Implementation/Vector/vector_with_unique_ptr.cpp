@@ -36,6 +36,7 @@ namespace own
             ~vector() noexcept
             {}
 
+            //copy constructor
             vector(const vector& source) noexcept
                 :_size(source.size),
                 _capacity(source.capacity),
@@ -47,6 +48,7 @@ namespace own
                 }
             }           
 
+            //copy assignment operator
             vector& operator=(const vector& source)
             {
                 if(this != &source)
@@ -57,7 +59,8 @@ namespace own
                 return *this;
             }
 
-              vector(const vector&& source) noexcept
+            //move constructor
+            vector(const vector&& source) noexcept
                 :_size(std::move(source.size)),
                 _capacity(std::move(source.capacity)),
                 _ptr(std::move(source._ptr))
@@ -66,6 +69,7 @@ namespace own
                 soruce.capacity = 0;
             }           
 
+            //move assignment operator
             vector& operator=(const vector&& source) noexcept
             {
                 if(this != &source)

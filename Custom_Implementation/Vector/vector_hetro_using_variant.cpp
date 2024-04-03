@@ -53,6 +53,25 @@ void Print(const HeretogeneousElement& var) const noexcept
     {
         std::get<Student>(var).print();
     }
+
+    //Alternate way using holds_alternative method
+    // if (std::holds_alternative<int>(var)) 
+    // {
+    //     std::cout << std::get<int>(var) << std::endl;
+    // }
+    // else if (std::holds_alternative<double>(var)) 
+    // {
+    //     std::cout << std::get<double>(var) << std::endl;
+    // }
+    // else if (std::holds_alternative<std::string>(var)) 
+    // {
+    //     std::cout << std::get<std::string>(var) << std::endl;
+    // }
+    // else if (std::holds_alternative<Student>(var)) 
+    // {
+    //     std::get<Student>(var).print();
+    // }
+
 }
 
 int main()

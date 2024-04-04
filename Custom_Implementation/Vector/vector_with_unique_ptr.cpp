@@ -109,7 +109,7 @@ namespace own
 
             T& operator[](T& index)
             {
-                return _ptr[index];
+                return _ptr[index]; //ask once again why returning reference
             }
 
             const T& operator[](T& index) const

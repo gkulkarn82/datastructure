@@ -52,7 +52,7 @@ private:
 
 int main()
 {
-    vector<std::unique_ptr<IElement>> vect ;    
+    vector<std::unique_ptr<IElement>> vect ;    //why IElement
     vect.emplace_back(std::make_unique<Element<int>>(10));
     vect.emplace_back(std::make_unique<Element<double>>(10.25));
     vect.emplace_back(std::make_unique<Element<string>>("string"));

@@ -57,7 +57,7 @@ namespace own
                     _ptrdata[i] = source._ptrdata[i];
                 }
                 _ptrdata[_size] ='\0';              
-            }
+            }           
 
             String& operator=(String& source) noexcept
             {
@@ -75,7 +75,7 @@ namespace own
                 return *this->_ptrdata[index];
             }
 
-            char& at(std::size_t index) const noexcept
+            char& at(std::size_t index) const
             {
                 if(index >= size())
                     throw("Index out of bound exception");
@@ -83,7 +83,7 @@ namespace own
                 return (*this->_ptrdata)[index] ;//this->operator[](index); //this->m_ptr[index];
             }
 
-            char* c_str() const noexcept
+            const char* c_str() const noexcept
             {
                 return this->_ptrdata;
             }
@@ -150,8 +150,8 @@ namespace own
 
             void shrink_to_fit() noexcept
             {                
-                if(_capacity != _size)
-                    _capacity = _size;                    
+               String temp(this->_ptrdata);
+               this->swap(temp);                          
             }
              
             void resize(size_t size) noexcept

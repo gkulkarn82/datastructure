@@ -76,12 +76,67 @@ namespace own
                 return temp;
             }
 
-            // void reset(T* p = nullptr)
-            // {
-            //     if(this->_ptr)
-            //         delete _ptr;
-            //     this->_ptr = p;
-            // }
+            void reset(T* p = nullptr) noexcept
+            {
+                unique_ptr uptr(p);
+                this->swap(uptr);
+            }
+
+            T* get() const noexcept
+            {
+                return _ptr;
+            }
+
+        private:
+            T* _ptr;
+    };
+
+    //Template partial specialisation
+    template<class T>
+    class unique_ptr<T[]>
+    {
+        public:           
+            explicit unique_ptr(T* ptr = nullptr) noexcept : _ptr(ptr) {}
+            unique_ptr(const unique_ptr& sourceptr) = delete;
+            unique_ptr& operator=(const unique_ptr& sourceptr) = delete;
+
+            unique_ptr(const unique_ptr&& source) noexcept : _ptr(std::move(source._ptr)) {
+                source._ptr = nullptr;
+            }          
+
+            void swap(const unique_ptr& source) noexcept
+            {
+                std::swap(this._ptr, source._ptr);
+            }
+
+            unique_ptr& operator=(const unique_ptr&& source) noexcept
+            {
+                if(this != &source)
+                {
+                    unique_ptr temp(std::move(source));
+                    this->swap(temp);
+                }  
+                return *this;
+            }
+
+            ~unique_ptr()
+            {
+                if(this->_ptr)
+                   delete []_ptr;
+            }         
+
+            operator bool() noexcept
+            {
+                return (_ptr != nullptr) ;
+            }
+
+            [[nodiscard]]
+            T* release() noexcept
+            {
+                T* temp = this->_ptr; 
+                this->_ptr = nullptr ;           
+                return temp;
+            }         
 
             void reset(T* p = nullptr) noexcept
             {
@@ -102,17 +157,19 @@ namespace own
 class Employee
 {
     public:
-        Employee(string name, int age):_name(name),_age(age)
-        {}
+        Employee(const string name = "", const int age = 0):_name(name),_age(age)
+        {
+             cout << "Employee constructor called " << endl;
+        }
         ~Employee()
         {
             cout << "Employee destructor called " << endl;
         }
-        string getName()
+        string getName() const
         {
             return _name;
         }
-        int getAge()
+        int getAge() const 
         {
             return _age;
         }
@@ -122,11 +179,13 @@ class Employee
 };
 int main()
 {
-    own::unique_ptr<int> i(new int(10));
-    *i = 20;
-    cout << "value of i =" << *i << endl;
-    own::unique_ptr<Employee> emp(new Employee("Test",25));
-    cout << "employee name = " << emp->getName() << " employee age " << emp->getAge() << endl;
+    // own::unique_ptr<int> i(new int(10));
+    // *i = 20;
+    // cout << "value of i =" << *i << endl;
+    // own::unique_ptr<Employee> emp(new Employee("Test",25));
+    // cout << "employee name = " << emp->getName() << " employee age " << emp->getAge() << endl;
+
+    own::unique_ptr<Employee[]> ptrEmp(new Employee[5]);
 
     return 0;
 }

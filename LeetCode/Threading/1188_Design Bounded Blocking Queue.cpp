@@ -5,7 +5,6 @@
     3. There will 5 consumer threads and 1 producer.    
 */
 
-
 #include<bits/stdc++.h>
 #include <thread>
 using namespace std;

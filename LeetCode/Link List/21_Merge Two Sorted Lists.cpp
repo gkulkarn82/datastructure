@@ -1,6 +1,6 @@
-/*
-
-*/
+#include<bits/stdc++.h>
+#include <thread>
+using namespace std;
 
 Node* MergeLinkList(Node* l1, Node* l2)
 {

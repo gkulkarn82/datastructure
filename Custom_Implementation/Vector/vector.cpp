@@ -119,8 +119,7 @@ public:
 
 private:
 	std::size_t m_size; // size_t is 8 byte unsined as size cannot be negative
-	T* m_ptr;
-	//unique_ptr<T> m_ptr; // keep for later modification
+	T* m_ptr;	
 };
 
 int main()

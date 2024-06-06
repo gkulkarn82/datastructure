@@ -61,7 +61,7 @@ int main()
         So since object is pointing to derived it will call the virtual function from derived but 
         since the distructor is not virtual it will call the distructor which has the type of Base
 
-        Now if we create a constructor in Derived and initialised a pointer veraible and assign a value
+        Now if we create a constructor in Derived and initialised a pointer varible and assign a value
         and deleting or releasing it in distructor then after above code execution the distructor of derived is not called
         hence it will be a memory leak for i.
 
@@ -91,7 +91,7 @@ int main()
         Distructor Of Base 
 
         Here since the print is virtual hence the print of Base is call based on the type of object but if the print method is not vitual the print of
-        Deerived will be called based on type of pointer
+        Derived will be called based on type of pointer
 
         Same is the case with destructor.
     

@@ -10,7 +10,8 @@
     7. implement release , get , reset and swap
 */
 
-#include<bits/stdc++.h>
+#include<string>
+#include<iostream>
 using namespace std;
 
 namespace own

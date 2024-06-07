@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 #include<thread>
+#include<semaphore>
 using namespace std;
 
 class DiningPhilosophers {    

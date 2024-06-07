@@ -14,11 +14,12 @@ What is std::variant ?
 #include<vector>
 #include<variant>
 #include<string>
+using namespace std;
 
 class Student
 {
     public:
-        Student(const std::string& name, const usigned short& age) noexcept: _name(name) , _age(age)
+        Student(const std::string& name, const unsigned short& age) noexcept : _name(name) , _age(age)
         {
 
         }
@@ -35,42 +36,42 @@ class Student
 using HeterogeneousVector = std::vector<std::variant<int , double, std::string, Student>>;
 using HeretogeneousElement = std::variant<int , double, std::string, Student>;
 
-void Print(const HeretogeneousElement& var) const noexcept
+void Print(const HeretogeneousElement& var) 
 {
-    if(var.index == 0)
-    {
-        std::cout << "Int: " << std::get<int>(var) << endl;
-    }
-    else if(var.index == 1)
-    {
-        std::cout << "Double: " << std::get<double>(var) << endl;
-    }
-    else if(var.index == 2)
-    {
-        std::cout << "String: " << std::get<std::string>(var) << endl;
-    }
-    else if(var.index == 3)
-    {
-        std::get<Student>(var).print();
-    }
-
-    //Alternate way using holds_alternative method
-    // if (std::holds_alternative<int>(var)) 
+    // if (var.index == 0)
     // {
-    //     std::cout << std::get<int>(var) << std::endl;
+    //     std::cout << "Int: " << std::get<int>(var) << endl;
     // }
-    // else if (std::holds_alternative<double>(var)) 
+    // else if(1 == var.index)
     // {
-    //     std::cout << std::get<double>(var) << std::endl;
+    //     std::cout << "Double: " << std::get<double>(var) << endl;
     // }
-    // else if (std::holds_alternative<std::string>(var)) 
+    // else if(var.index == 2)
     // {
-    //     std::cout << std::get<std::string>(var) << std::endl;
+    //     std::cout << "String: " << std::get<std::string>(var) << endl;
     // }
-    // else if (std::holds_alternative<Student>(var)) 
+    // else if(var.index == 3)
     // {
     //     std::get<Student>(var).print();
     // }
+
+    //Alternate way using holds_alternative method
+    if (std::holds_alternative<int>(var)) 
+    {
+        std::cout << std::get<int>(var) << std::endl;
+    }
+    else if (std::holds_alternative<double>(var)) 
+    {
+        std::cout << std::get<double>(var) << std::endl;
+    }
+    else if (std::holds_alternative<std::string>(var)) 
+    {
+        std::cout << std::get<std::string>(var) << std::endl;
+    }
+    else if (std::holds_alternative<Student>(var)) 
+    {
+        std::get<Student>(var).print();
+    }
 
 }
 

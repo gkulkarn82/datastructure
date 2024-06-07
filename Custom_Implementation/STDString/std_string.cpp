@@ -72,7 +72,7 @@ namespace own
 
             char& operator[](size_t index) const noexcept
             {
-                return *this->_ptrdata[index];
+                return this->_ptrdata[index];//(*this)->_ptrdata[index];
             }
 
             char& at(std::size_t index) const
@@ -80,22 +80,22 @@ namespace own
                 if(index >= size())
                     throw("Index out of bound exception");
                 
-                return (*this->_ptrdata)[index] ;//this->operator[](index); //this->m_ptr[index];
+                return (*this)[index];//(*this->_ptrdata)[index] ;//this->operator[](index); //this->m_ptr[index];
             }
 
-            const char* c_str() const noexcept
+            const char* c_str() noexcept
             {
                 return this->_ptrdata;
             }
 
             char& back() const noexcept
             {
-                return *this->_ptrdata[size -1];
+                return _ptrdata[_size -1];
             }
 
             char& front() const noexcept
             {
-                return *this->_ptrdata[0];
+                return _ptrdata[0];
             }
 
             String(String&& source) noexcept :
@@ -156,7 +156,7 @@ namespace own
              
             void resize(size_t size) noexcept
             {                
-                if(size >= lenght())
+                if(size >= length())
                     return;
 
                 this->_ptrdata[size] = '\0';

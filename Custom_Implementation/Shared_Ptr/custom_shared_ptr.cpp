@@ -43,7 +43,7 @@ private:
 	unsigned int m_counter;
 };
 
-friend ostream& operator<<(ostream& os,	const ReferenceCounter& counter)
+ostream& operator<<(ostream& os,const ReferenceCounter& counter)
 {
 	os << "Counter Value : " << counter.m_counter<< endl;
 	return os;
@@ -58,7 +58,7 @@ public:
 	explicit Shared_ptr(T* ptr = nullptr) noexcept :m_ptr(ptr)
 	{
 		//m_ptr = ptr;
-		m_counter = new Counter();
+		m_counter = new ReferenceCounter();
 		(*m_counter)++;
 	}
 
@@ -68,21 +68,21 @@ public:
 		(*m_counter)++;
 	}
 
-	void swap(Shared_ptr& source)
+	void swap(Shared_ptr<T>& source)
 	{
 		std::swap(this->m_counter, source->m_counter);
 		std::swap(this->m_ptr, source->m_ptr);
 	}
 
 	//Copy Assignment operator
-	Shared_ptr& operator=(const Shared_ptr& source) noexcept
+	Shared_ptr<T>& operator=(const Shared_ptr<T>& source) noexcept
 	{
 		if(this != &source)
 		{
 			Shared_ptr tmp(source);
 			this->swap(tmp);
 		}
-		*this->m_counter++
+		*this->m_counter++;
 		return *this;
 	}
 
@@ -95,14 +95,14 @@ public:
 	}
 
 	//Copy Assignment operator
-	Shared_ptr& operator=(const Shared_ptr&& source) noexcept
+	Shared_ptr<T>& operator=(const Shared_ptr<T>&& source) noexcept
 	{
 		if(this != &source)
 		{
 			Shared_ptr tmp(std::move(source));
 			this->swap(tmp);
 		}
-		*this->m_counter++
+		*this->m<>_counter++;
 		return *this;
 	}
 
@@ -141,7 +141,7 @@ public:
 		}
 	}
 
-	friend ostream& operator<<(ostream& os,	Shared_ptr<T>& sp);	
+	friend ostream& operator<<(ostream& os,	Shared_ptr<T>& sp);
 
 private:
 	// Reference counter
@@ -150,7 +150,8 @@ private:
 	T* m_ptr;
 };
 
-friend ostream& operator<<(ostream& os,	Shared_ptr<T>& sp)
+template<class T>
+ostream& operator<<(ostream& os, Shared_ptr<T>& sp)
 {
 	os << "Address pointed : " << sp.get() << endl;
 	os << *(sp.m_counter) << endl;

@@ -25,6 +25,16 @@ struct ListNode {
 
 
 class Solution {
+    bool IsPalindromeHelper(ListNode*& start, ListNode* end)
+    {
+        if(end == nullptr) return true;
+        
+        if(!IsPalindromeHelper(start, end->next)) return false;
+        if(start->val != end->val) return false;
+        
+        start = start->next;
+        return true;
+    }
 public:
     bool isPalindrome(ListNode* head) {
         //Approach I
@@ -86,6 +96,8 @@ public:
 
         // return true;
 
-
+        //Approach III Recursion
+        if(head == nullptr || head->next == nullptr) return true;            
+        return IsPalindromeHelper(head, head);     
     }
 };

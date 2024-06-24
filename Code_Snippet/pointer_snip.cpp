@@ -68,12 +68,12 @@ main()
 // Explaination: error because of initializing variables in structure declaration
 
 
-int main()
-{
-    register i = 5;
-    char j[] = "hello";
-    printf("%s %d", j, i);
-}
+// int main()
+// {
+//     register i = 5;
+//     char j[] = "hello";
+//     printf("%s %d", j, i);
+// }
 
 // Output: hello 5
 // Explaination: if you declare i as register compiler will treat it as ordinary integer and it will take integer value.

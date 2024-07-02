@@ -177,25 +177,29 @@ using namespace std;
 // Explaination: It is multiple inheritance example
 
 
-struct a
-{
-    int count;
-};
+// struct a
+// {
+//     int count;
+// };
 
-struct b
-{
-    int* value;
-};
+// struct b
+// {
+//     int* value;
+// };
 
-struct c: public a, public b
-{
+// struct c: public a, public b
+// {
 
-};
+// };
 
-int main()
-{
-    c* p = new c;
-    p->value = 0;
-    cout << "inherited" ;
-    return 0;
-}
+// int main()
+// {
+//     c* p = new c;
+//     p->value = 0;
+//     cout << "inherited" ;
+//     return 0;
+// }
+
+// Output: inherited 
+// Explaination: structures supports inheritance
+

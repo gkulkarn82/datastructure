@@ -72,7 +72,7 @@ public:
 
 
         //Approach II
-        //Processing only all elements using stack       
+        //Processing all elements using stack       
         // ListNode* curr = head;
         // stack<ListNode*> s;
         // while(curr != NULL)

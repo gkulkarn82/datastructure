@@ -1,4 +1,6 @@
 #include<iostream>
+#include<queue>
+#include<vector>
 using namespace std;
 
 /**
@@ -11,6 +13,15 @@ using namespace std;
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+
+struct ListNode {
+      int val;
+      ListNode *next;
+      ListNode() : val(0), next(nullptr) {}
+      ListNode(int x) : val(x), next(nullptr) {}
+      ListNode(int x, ListNode *next) : val(x), next(next) {}
+ };
+ 
 class Solution {
     struct GreaterVal
     {
@@ -21,7 +32,7 @@ class Solution {
     };
 public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
-        std::priority_queue<ListNode*, std::vector<ListNode*>, GreaterVal> pq;
+        priority_queue<ListNode*, std::vector<ListNode*>, GreaterVal> pq;
         
         if(lists.size() == 0) 
             return nullptr; 

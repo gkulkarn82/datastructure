@@ -45,7 +45,7 @@ int main()
     thread t2(odd);
 
     t1.join();
-    t2.join();
+    t 2.join();
 
     return 0;
 }

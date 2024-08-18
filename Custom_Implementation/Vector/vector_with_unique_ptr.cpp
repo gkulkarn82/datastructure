@@ -171,22 +171,22 @@ int main()
     vect.push_back(2);
     PrintStatistics(vect);
 
-    std::cout<< "Copy constructor" << endl;
+    std::cout<< "Copy constructor" << std::endl;
     own::vector<int> vect1 = vect;
     PrintStatistics(vect1);
     PrintStatistics(vect);
 
-    std::cout<< "Move constructor" << endl;
+    std::cout<< "Move constructor" << std::endl;
     own::vector<int> vect2 = std::move(vect);
     PrintStatistics(vect2);
     PrintStatistics(vect);
 
-    std::cout<< "Copy Assignement" << endl;
+    std::cout<< "Copy Assignement" << std::endl;
     vect = vect1;
     PrintStatistics(vect1);
     PrintStatistics(vect);
 
-    std::cout<< "Move Assignement" << endl;
+    std::cout<< "Move Assignement" << std::endl;
     vect = std::move(vect2);
     PrintStatistics(vect2);
     PrintStatistics(vect);

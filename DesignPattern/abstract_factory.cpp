@@ -44,7 +44,7 @@ class ConcreteProductA1 : public AbstractProductA
 class ConcreteProductA2 : public AbstractProductA
 {
     public:
-        std::string UsefuleFunctionA() const override
+        std::string UsefulFunctionA() const override
         {
             return "The result of product A2";
         }

@@ -45,7 +45,7 @@ int main()
     while(*name != 0)
     {
         printf("%c", name);
-        name++
+        name++;
     }
 
     /*

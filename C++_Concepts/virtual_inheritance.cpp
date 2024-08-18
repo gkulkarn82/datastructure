@@ -8,12 +8,16 @@ using namespace std;
 class Base
 {
 public:
+    Base()
+    {
+        cout << "Constructor Of Base " << endl;
+    }
     virtual void print()
     {
         cout << "Print Of Base Class " << endl;
     }
 
-    virtual ~Base()
+    ~Base()
     {
         cout << "Distructor Of Base " << endl;
     }
@@ -27,6 +31,7 @@ class Derived : public Base
 public:
     Derived()
     {
+        cout << "Constructor Of Deerived " << endl;
         i = new int(5);
     }
 
@@ -69,9 +74,9 @@ int main()
         to fix it mark the destructor of base as virtual
     */
 
-    Derived* derivedPtr = static_cast<Derived*>(new Base());
-    derivedPtr->print();
-    delete derivedPtr;
+    // Derived* derivedPtr = static_cast<Derived*>(new Base());
+    // derivedPtr->print();
+    // delete derivedPtr;
 
     /*
         O/P
@@ -97,6 +102,9 @@ int main()
     
     
     */
+
+    Base* ptr = new Derived();
+    delete ptr;
 
     return 0;
 }

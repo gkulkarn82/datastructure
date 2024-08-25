@@ -72,7 +72,7 @@ void inorder(Node* root)
 int main()
 {
 	// Construct a tree shown in the above figure
-	struct Node* root = newNode(20);
+	struct Node* root = newNode(20); 
 	root->left = newNode(8);
 	root->right = newNode(22);
 	root->left->left = newNode(4);

@@ -44,7 +44,7 @@ class Creator
         std::string SomeOperation() const 
         {
             // Call the factory method to create a Product object.
-            Product* product = this->FactoryMethod();
+            Product* product = this->FacotryMethod();
             // Now, use the product.
             std::string result = "Creator: The same creator's code has just worked with " + product->Operation();
             delete product;
@@ -88,13 +88,13 @@ void ClientCode(const Creator& creator)
 int main() {
   std::cout << "App: Launched with the ConcreteCreator1.\n";
   
-  Creator* creator = new ConcreteCreator1();
+  Creator* creator =  new ConcreateCreator1();
   ClientCode(*creator);
   
   std::cout << std::endl;
   std::cout << "App: Launched with the ConcreteCreator2.\n";
   
-  Creator* creator2 = new ConcreteCreator2();
+  Creator* creator2 = new ConcreateCreator2();
   ClientCode(*creator2);
 
   delete creator;

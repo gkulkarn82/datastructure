@@ -142,6 +142,7 @@ void heapifyInsert(int arr[], int n, int i)
 
 void insertNode(int arr[], int n, int key)
 {
+
     //Add the element at the end of the array
     //for that increase the size of an array
     n = n + 1;

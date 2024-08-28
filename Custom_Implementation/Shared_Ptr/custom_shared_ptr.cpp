@@ -55,7 +55,7 @@ class Shared_ptr
 {
 public:
 	// Constructor
-	explicit Shared_ptr(T* ptr = nullptr) noexcept :m_ptr(ptr)
+	explicit Shared_ptr(T* ptr = nullptr) noexcept : m_ptr(ptr)
 	{
 		//m_ptr = ptr;
 		m_counter = new ReferenceCounter();
@@ -63,7 +63,7 @@ public:
 	}
 
 	// Copy constructor
-	Shared_ptr(Shared_ptr<T>& sp) noexcept :m_ptr(sp.m_ptr), m_counter(sp.m_counter)
+	Shared_ptr(Shared_ptr<T>& sp) noexcept : m_ptr(sp.m_ptr), m_counter(sp.m_counter)
 	{
 		(*m_counter)++;
 	}
@@ -102,7 +102,7 @@ public:
 			Shared_ptr tmp(std::move(source));
 			this->swap(tmp);
 		}
-		*this->m<>_counter++;
+		*this->m_counter++;
 		return *this;
 	}
 

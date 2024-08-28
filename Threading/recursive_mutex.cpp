@@ -1,5 +1,6 @@
 /*
-The recursive_mutex class is a synchronization primitive that can be used to protect shared data from being simultaneously accessed by multiple threads.
+The recursive_mutex class is a synchronization primitive that can be used to protect shared data from being 
+simultaneously accessed by multiple threads.
 
 recursive_mutex offers exclusive, recursive ownership semantics:
 

@@ -2,6 +2,11 @@
     Some important links for code and jobs search
 */
 
+Reading References
+------------------------------------
+1. https://makefiletutorial.com/  # Learn how to create and work with make file
+
+
 Resume Scan and ATS
 ------------------------------------
 1.Resume Scan

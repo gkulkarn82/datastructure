@@ -25,7 +25,7 @@ namespace own
             T pop()
             {
                 unique_lock<mutex> lock(mu);
-                cv.wait(lock, [this](){return !qu.empty();});               
+                cv.wait(lock, [this](){ return !qu.empty(); });               
                 T element = qu.front();
                 qu.pop();
                 return element;             

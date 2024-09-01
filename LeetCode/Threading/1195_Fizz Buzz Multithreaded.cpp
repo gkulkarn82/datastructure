@@ -18,8 +18,8 @@ public:
         while(start <= n)
         {
             unique_lock<mutex> lock(m1);
-            cv.wait(lock,[this](){return (start > n) || ((start % 3 == 0) && (start % 5 != 0));});
-            if(start > n)
+            cv.wait(lock,[this](){ return (start > n) || ((start % 3 == 0) && (start % 5 != 0));});
+            if(start > n) /// this condition is of not used as this will never be true
                 break;
             printFizz();
             ++start;
@@ -33,7 +33,7 @@ public:
         while(start <= n)
         {
             unique_lock<mutex> lock(m1);
-            cv.wait(lock,[this](){return (start > n) || ((start % 3 != 0) && (start % 5 == 0));});
+            cv.wait(lock,[this](){ return (start > n) || ((start % 3 != 0) && (start % 5 == 0));});
             if(start > n)
                 break;
             printBuzz();

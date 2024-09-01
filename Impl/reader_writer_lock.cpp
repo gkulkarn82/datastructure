@@ -8,6 +8,7 @@ public:
     ReaderWriterLock() : readers(0), writer(false) {}
 
     // Acquire a read lock
+    // When there is no thread writing means writer thread is false
     void lock_read() {
         std::unique_lock<std::mutex> lock(mutex_);
         read_condition.wait(lock, [this]() {
@@ -17,6 +18,7 @@ public:
     }
 
     // Release a read lock
+    // unlock each mutex and decrease the value of reader by one and inform writer when this is 0
     void unlock_read() {
         std::lock_guard<std::mutex> lock(mutex_);
         if (--readers == 0) {

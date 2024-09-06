@@ -12,7 +12,7 @@ public:
     void lock_read() {
         std::unique_lock<std::mutex> lock(mutex_);
         read_condition.wait(lock, [this]() {
-            return !writer; // Wait until there is no writer
+            return !writer && vito == false; // Wait until there is no writer
         });
         ++readers;
     }
@@ -29,18 +29,23 @@ public:
     // Acquire a write lock
     void lock_write() {
         std::unique_lock<std::mutex> lock(mutex_);
+        vito = true;
         write_condition.wait(lock, [this]() {
             return !writer && readers == 0; // Wait until no writers and no readers
         });
         writer = true;
+        writer_queue++;
     }
 
     // Release a write lock
     void unlock_write() {
         std::lock_guard<std::mutex> lock(mutex_);
         writer = false;
-        read_condition.notify_all(); // Notify all waiting readers
-        write_condition.notify_one(); // Notify one waiting writer
+        if(-- writer_queue ==  0)
+        {
+            read_condition.notify_all(); // Notify all waiting readers
+            write_condition.notify_one(); // Notify one waiting writer
+        }
     }
 
 private:
@@ -49,6 +54,8 @@ private:
     std::condition_variable write_condition;
     int readers; // Number of current readers
     bool writer; // Flag to indicate if a writer is active
+    bool vito = false;
+    int writer_queue;
 };
 
 // Example usage

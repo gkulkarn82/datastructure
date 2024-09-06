@@ -1,5 +1,5 @@
 // A C++ Program serialize and deserialize an N-ary tree
-#include<cstdio>
+ #include<cstdio>
 #define MARKER ')'
 #define N 5
 using namespace std;

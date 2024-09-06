@@ -171,7 +171,7 @@ int main() {
 }
 
 
-
+/*
 The provided C++ code snippet is for a multi-threaded server application that uses a thread pool to handle client requests. Below is an explanation of the key parts of the code:
 
 Header Inclusions: The necessary header files are included for handling input/output streams, strings, unordered maps (for storing key-value pairs), threading, mutexes (for synchronization), vectors, functional programming utilities, and signal handling.
@@ -206,3 +206,5 @@ Initializes a thread pool with 4 threads.
 Server socket setup logic should be here (it's indicated by placeholders).
 Enters into a loop where it listens for incoming connections on the specified port (PORT). For each accepted connection, it enqueues the task of handling that client to the thread pool.
 Error in Code: There are some typos in your code snippet (std:vector, std:queue, etc.). These should be corrected to use double colons (std::vector, std::queue, etc.).
+
+*/

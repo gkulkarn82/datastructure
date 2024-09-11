@@ -34,7 +34,6 @@ void consumer()
         int item = qu.front();
         qu.pop();
         cout << "Item is consumed = " << item << endl;
-        //cv.notify_one();
     }
 }
 

@@ -43,7 +43,7 @@ int deSerialize(Node *&root, FILE *fp)
     // Read next item from file. If there are no more items or next
     // item is marker, then return 1 to indicate same
     char val;
-    if ( !fscanf(fp, "%c ", &val) || val == MARKER )
+    if ( !fscanf(fp, "%c ", &val)  || val == MARKER )
        return 1;
 
     // Else create node with this item and recur for children

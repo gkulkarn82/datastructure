@@ -41,7 +41,7 @@ public:
     void unlock_write() {
         std::lock_guard<std::mutex> lock(mutex_);
         writer = false;
-        if(-- writer_queue ==  0)
+        if(--writer_queue ==  0)
         {
             read_condition.notify_all(); // Notify all waiting readers
             write_condition.notify_one(); // Notify one waiting writer

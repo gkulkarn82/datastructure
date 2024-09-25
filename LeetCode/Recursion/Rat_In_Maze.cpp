@@ -8,7 +8,7 @@ class Solutions
 private:
     bool isSafe(int x, int y, int n, vector<vector<int>> visited, vector<vector<int>>& m)
     {
-        if((x >= 0 && x <n) && (y >= 0 && y <n) && visited[x][y] == 0 && m[x][y] == 1)
+        if((x >= 0 && x < n) && (y >= 0 && y <n) && visited[x][y] == 0 && m[x][y] == 1)
             return true;
         else
             return false;

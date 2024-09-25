@@ -77,8 +77,8 @@ int main()
         since the distructor is not virtual it will call the distructor which has the type of Base
 
         Now if we create a constructor in Derived and initialised a pointer varible and assign a value
-        and deleting or releasing it in distructor then after above code execution the distructor of derived is not called
-        hence it will be a memory leak for i.
+        and deleting or releasing it in distructor then after above code execution the distructor of 
+        derived is not called hence it will be a memory leak for i.
 
         if we comment the constructor and distructor code for i then there will not be a memory leak
         to fix it mark the destructor of base as virtual

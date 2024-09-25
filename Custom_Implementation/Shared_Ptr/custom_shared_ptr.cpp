@@ -1,9 +1,27 @@
 /*
-Explicit Keyword in C++ is used to mark constructors to not implicitly convert types in C++. It is optional for constructors that 
-take exactly one argument and work on constructors(with a single argument) since those are the only constructors that can be used in 
+Explicit Keyword in C++ is used to mark constructors to not implicitly convert types in C++. 
+It is optional for constructors that take exactly one argument and work on 
+constructors(with a single argument) since those are the only constructors that can be used in 
 typecasting.
 
 Reference : https://www.geeksforgeeks.org/use-of-explicit-keyword-in-cpp/
+
+
+std::shared_ptr is a smart pointer that retains shared ownership of an object through a pointer. Several shared_ptr 
+objects may own the same object. The object is destroyed and its memory deallocated when either of the following 
+happens:
+
+the last remaining shared_ptr owning the object is destroyed;
+the last remaining shared_ptr owning the object is assigned another pointer via operator= or reset().
+The object is destroyed using delete-expression or a custom deleter that is supplied to shared_ptr during construction.
+
+A shared_ptr can share ownership of an object while storing a pointer to another object. This feature can be used to 
+point to member objects while owning the object they belong to. The stored pointer is the one accessed by get(), the 
+dereference and the comparison operators. The managed pointer is the one passed to the deleter when use count reaches 
+zero.
+
+A shared_ptr may also own no objects, in which case it is called empty (an empty shared_ptr may have a non-null stored 
+pointer if the aliasing constructor was used to create it).
 
 */
 

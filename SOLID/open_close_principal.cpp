@@ -5,7 +5,7 @@ Def : Open for extension but closed for modification
 
 */
 
-#include <bits/stdc++.h>;
+#include<iostream>
 using namespace std;
 
 class Marker
@@ -17,12 +17,12 @@ public:
     int year;
     int price;
 
-    public Marker(string name, string color, int year, int price)
+    Marker(string name, string color, int year, int price)
     {
-        this.name = name;
-        this.color = color;
-        this.year = year;
-        this.price = price;
+        this->name = name;
+        this->color = color;
+        this->year = year;
+        this->price = price;
     }
 };
 
@@ -30,16 +30,19 @@ public:
 
 class Invoice
 {
-    private Marker marker;
-    private int quantity;
 
-    public Invoice(Marker marker, int quantity)
+private:
+    Marker marker;
+    int quantity;
+
+public:
+    Invoice(Marker marker, int quantity)
     {
         this->marker = marker;
         this->quantity = quantity;
     }
 
-    public int calculateTotal()
+    int calculateTotal()
     {
         int price = ((marker.price) * this->quantity);
     }
@@ -47,18 +50,22 @@ class Invoice
 
 class InvoicePrinter
 {
-    Invoice Invoice;
 
-    public InvoicePrinter(Invoice invoice)
+private:
+    Invoice invoice;
+
+public:
+    InvoicePrinter() = default;
+    InvoicePrinter(Invoice inv):invoice(inv)
     {
-        this.invoice = invoice;
+        
     }
 
-    public void printInvoice()
+    void printInvoice()
     {
-
+        return;
     }    
-}
+};
 
 /*
     As per the principal of open close this class should be open for extension for not for modification

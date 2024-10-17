@@ -32,7 +32,7 @@ public:
     Derived()
     {
         cout << "Constructor Of Deerived " << endl;
-        i = new int(5);
+        //i = new int(5);
     }
 
     void print() override 
@@ -43,7 +43,7 @@ public:
     ~Derived()
     {
         cout << "Distructor Of Derived " << endl;
-        delete i;
+        //delete i;
     }
 
 private:
@@ -57,7 +57,7 @@ int main()
     // basePtr->print();
     // delete basePtr;
 
-       //Upcasting is allowed where this is a downcasting which is not allowed
+    //Upcasting is allowed where below code this is a downcasting which is not allowed
     //    Derived* derivedPtr = dynamic_cast<Derived*>(new Base());
     //    if(derivedPtr == nullptr)
     //    {
@@ -72,31 +72,31 @@ int main()
         Print Of Derived Class 
         Distructor Of Base
 
-        There will be no memory leak as the object initialised of Derived but is of type Base pointer
+        There will be no memory leak as the object initialised of Derived but pointer is of type Base pointer
         So since object is pointing to derived it will call the virtual function from derived but 
         since the distructor is not virtual it will call the distructor which has the type of Base
 
         Now if we create a constructor in Derived and initialised a pointer varible and assign a value
         and deleting or releasing it in distructor then after above code execution the distructor of 
-        derived is not called hence it will be a memory leak for i.
+        derived will not be called hence it will be a memory leak for i.
 
         if we comment the constructor and distructor code for i then there will not be a memory leak
         to fix it mark the destructor of base as virtual
     */
 
-    // Derived* derivedPtr = static_cast<Derived*>(new Base());
-    // derivedPtr->print();
-    // delete derivedPtr;
+    Derived* derivedPtr = static_cast<Derived*>(new Base());
+    derivedPtr->print();
+    delete derivedPtr;
 
     /*
         O/P
         Print Of Base Class 
         Distructor Of Base 
 
-        Here creating object of type base and pointer of Derived class is not allowed a will give compiler error.
-        After applying static_cast it allows but then it calls the Print of base class as the object is of base class but when we delete
-        the pointer it will call the distructor of Base class because destructor of object is called which is of type base and there is no 
-        other parent class above Base hence only that destructor is called
+        Here creating object of type base and pointer of Derived class is not allowed and will give compiler error.
+        After applying static_cast it allows but then it calls the Print of base class as the object is of base class but 
+        when we delete the pointer it will call the distructor of Base class because destructor of object is called which 
+        is of type base and there is no other parent class above Base hence only that destructor is called
 
         Now if we mark the destructor of base as non virtual then
     
@@ -105,8 +105,8 @@ int main()
         Distructor Of Derived 
         Distructor Of Base 
 
-        Here since the print is virtual hence the print of Base is call based on the type of object but if the print method is not vitual the print of
-        Derived will be called based on type of pointer
+        Here since the print is virtual hence the print of Base is call based on the type of object but if the print 
+        method is not vitual the print of  Derived will be called based on type of pointer
 
         Same is the case with destructor.
     */

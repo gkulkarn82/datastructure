@@ -22,6 +22,7 @@ int main()
     cout<< objA.x << " " << objB.y << endl; 
     return 0;
 }
+
 void IndiaBix::Exchange(int *x, int *y)
 {
     int t;

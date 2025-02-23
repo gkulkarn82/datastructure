@@ -31,7 +31,6 @@ private:
     int solve(vector<int>& nums)
     {
         int n = nums.size();
-        int n = nums.size();
     
         int prev2 = 0;
         int prev1 = nums[0];

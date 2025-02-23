@@ -33,7 +33,7 @@ class ReferenceCounter
 {
 public:
 	// Constructor
-	ReferenceCounter() : m_counter(0){};
+	ReferenceCounter() : m_counter(0){}
 
 	//delete the copy constructor and assignment operator implementation
 	ReferenceCounter(const ReferenceCounter&) = delete;
@@ -63,7 +63,7 @@ private:
 
 ostream& operator<<(ostream& os,const ReferenceCounter& counter)
 {
-	os << "Counter Value : " << counter.m_counter<< endl;
+	os << "Counter Value : " << counter.get()<< endl;
 	return os;
 }
 
@@ -159,7 +159,8 @@ public:
 		}
 	}
 
-	friend ostream& operator<<(ostream& os,	Shared_ptr<T>& sp);
+	template<class M>
+	friend ostream& operator<<(ostream& os,	Shared_ptr<M>& sp);
 
 private:
 	// Reference counter
@@ -168,11 +169,11 @@ private:
 	T* m_ptr;
 };
 
-template<class T>
-ostream& operator<<(ostream& os, Shared_ptr<T>& sp)
+template<class M>
+ostream& operator<<(ostream& os, Shared_ptr<M>& sp)
 {
 	os << "Address pointed : " << sp.get() << endl;
-	os << *(sp.m_counter) << endl;
+	os << *(sp.get()) << endl;
 	return os;
 }
 

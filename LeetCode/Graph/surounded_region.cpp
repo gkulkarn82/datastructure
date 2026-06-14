@@ -5,19 +5,22 @@ using namespace std;
 
 class Solution
 {
-    void dfs(int row, int col, vector<vector<int>>& vis, vector<vector<int>>& mat)
+    void dfs(int row, int col, vector<vector<int>>& vis, vector<vector<char>>& mat)
     {
         vis[row][col] = 1;
 
+        int n = mat.size();
+        int m = mat[0].size();
+    
         int delRow[] = {-1, 0, +1, 0};
-        int delCol[] = {0, +1, 0 , -1}
+        int delCol[] = {0, +1, 0 , -1};
 
-        for(itn i = 0 ; i < 4; ++i)
+        for(int i = 0 ; i < 4; ++i)
         {
             int nrow = row + delRow[i];
             int ncol = col + delCol[i];
 
-            if(nrow > =0 && nrow < n && ncol >=0 && ncol <m &&
+            if(nrow >= 0 && nrow < n && ncol >=0 && ncol <m &&
                 mat[nrow][ncol] == '0')
             {
                 dfs(nrow, ncol, vis, mat);
@@ -25,7 +28,7 @@ class Solution
         }
     }
     public:
-        vector<vector<char>> fill(int n, int m, vector<vector<char>> mat)
+        vector<vector<char>> fill(int n, int m, vector<vector<char>>& mat)
         {
             vector<vector<int>> vis(n, vector<int>(m, 0));
             for(int i = 0 ; i < n; ++i)
